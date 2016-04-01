@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+employees = ChicagoEmployees::Employee.all
 
 ## Development
 
