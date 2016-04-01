@@ -15,11 +15,9 @@ module ChicagoEmployees
   	end
 
   	def self.all
-  		ruby_data = []
-  		bulk_data = Unirest.get("https://data.cityofchicago.org/resource/xzkq-xp2w.json")
+  		Unirest.get("https://data.cityofchicago.org/resource/xzkq-xp2w.json")
   			.body
   			.map { |employee| Employee.new(employee) }
-  		end
   	end
 
   	def self.find(parameter_option)
@@ -31,6 +29,13 @@ module ChicagoEmployees
   			ruby_data << Employee.new(employee)
   		end
   		ruby_data
+  	end
+
+  	def self.highest_paid_three
+  		employees = Unirest.get("https://data.cityofchicago.org/resource/xzkq-xp2w.json")
+  			.body
+  			.map { |employee| Employee.new(employee) }
+  		employees.max_by(3) { |employee| employee.salary }
   	end
   end
 end
